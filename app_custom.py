@@ -51,7 +51,9 @@ router = APIRouter()
 async def process_image(dto: TeethRequestDto) -> TeethResponseDto:
     try:
         # Decode the base64 image
-        img_data = base64.b64decode(dto.teeth_image)
+        with open(dto.teeth_image, "rb") as image_file:
+            encoded_image = base64.b64encode(image_file.read()).decode("utf-8")
+        img_data = base64.b64decode(encoded_image)
         nparr = np.frombuffer(img_data, np.uint8)
         img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
         

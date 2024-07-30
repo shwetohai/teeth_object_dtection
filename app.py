@@ -26,6 +26,7 @@ model = get_model(model_id="teeth_annotation_sl_techno/1")
 # DTO for the image request
 class TeethRequestDto(BaseModel):
     teeth_image: str
+    confidence: float = 0.2
 
 
 # DTO for the response of the process-image endpoint
@@ -48,7 +49,7 @@ router = APIRouter()
 async def process_image(dto: TeethRequestDto) -> TeethResponseDto:
     try:
         # Perform inference
-        result = model.infer(image=dto.teeth_image, confidence=0.2)
+        result = model.infer(image=dto.teeth_image, confidence= dto.confidence)
 
         # Extract predictions
         predictions = result[0].predictions
