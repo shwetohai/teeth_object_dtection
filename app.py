@@ -20,7 +20,7 @@ app.add_middleware(
 )
 
 # Load model
-model = get_model(model_id="teeth_annotation_sl_techno/1")
+model = get_model(model_id="teeth_annotation_sl_techno/1", api_key="tlU5DJCpixYaQTqSGhMx")
 
 
 # DTO for the image request
